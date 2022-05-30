@@ -23,10 +23,10 @@ timezone: Americas/New_York
 
 title: Title Goes Here                          # the main title
 
-tagline:  Not sure what this is going to be yet...   # it will display as the sub-title
+tagline:  This is a blog about DFIR and IT in general, I make no promised as to the regularity of updates... ¯\_(ツ)_/¯   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
- Not sure what this is going to be yet...
+DFIR and general IT
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://hamishthepiper.github.io'
