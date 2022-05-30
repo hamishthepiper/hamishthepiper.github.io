@@ -23,7 +23,7 @@ timezone: Americas/New_York
 
 title: Title Goes Here                          # the main title
 
-tagline:  This is a blog about DFIR and IT in general, I make no promised as to the regularity of updates... ¯\_(ツ)_/¯   # it will display as the sub-title
+tagline:  This is a blog about DFIR and IT in general, I make no promises as to the regularity of updates... ¯\_(ツ)_/¯   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
  DFIR and general IT
