@@ -1,6 +1,6 @@
 ---
 title: Hello World
-date: 2022-05-30 15:53 -5000
+date: 2022-05-30 15:53 -500
 categories: [info, admin]
 tags: [info]     # TAG names should always be lowercase
 ---
