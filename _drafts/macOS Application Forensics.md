@@ -41,4 +41,4 @@ However the Files directory contains attachments embedded within individual entr
 
 ![](/assets/images/Pasted%20image%2020220613221659.png)
 
-The above screenshot is the directory for the Reminders application. There are several SQLite database files as well as a `.plist` file.
+The above screenshot is the directory for the Reminders application. There are several SQLite database files as well as a `.plist` file. Double-clicking on the `.plist` file with 
