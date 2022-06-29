@@ -33,7 +33,7 @@ The user's Library directory is where most application-specific files are found.
 
 First, the application will have a discrete place in the user's Library directory.
 
-![](/assets/images/Pasted%20image%2020220613222840.png)
+![](/static/assets/images/Pasted%20image%2020220613222840.png)
 
 The above screenshot is the directory for the Reminders application. There are several SQLite database files in sub-directories as well as a plist file. Double-clicking on the .plist file with Xcode tools installed will show the contents whether it is a regular or binary format. 
 
