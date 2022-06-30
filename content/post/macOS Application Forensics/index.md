@@ -26,31 +26,37 @@ This means that if you are examining an **Apple Native** application such as Saf
 ### The Home Directory
 The user's home directory (~) usually contains the bulk of forensically-relevant files for specific applications. Some programs use "dotfiles" (files or directories prepended with `.` which are hidden) which are at the root of the user's directory, and could contain relevant information.
 
-![Hidden folder for Visual Studio Code](/assets/images/Pasted%20image%2020220613212422.png)
+![Hidden folder for Visual Studio Code](Pasted%20image%2020220613212422.png)
 
 #### ~/Library
 The user's Library directory is where most application-specific files are found. There are several supporting directories.
 
 First, the application will have a discrete place in the user's Library directory.
 
-![](/static/assets/images/Pasted%20image%2020220613222840.png)
+![](Pasted%20image%2020220613222840.png)
 
 The above screenshot is the directory for the Reminders application. There are several SQLite database files in sub-directories as well as a plist file. Double-clicking on the .plist file with Xcode tools installed will show the contents whether it is a regular or binary format. 
 
-![](/assets/images/Pasted%20image%2020220613223534.png)
+![](Pasted%20image%2020220613223534.png)
+
 > In this case, the `AccountInformation.plist` file contains no relevant information.
 
 However the Files directory contains attachments embedded within individual entries.
-![](/assets/images/Pasted%20image%2020220613223734.png)
+
+![](Pasted%20image%2020220613223734.png)
 
 And the Stores directory contains SQLite files.
-![](/assets/images/Pasted%20image%2020220613221659.png)
+
+![](Pasted%20image%2020220613221659.png)
 
 Opening the `Data-local.sqlite` file with DB Browser for SQLite will let us see that data. 
-![](/assets/images/Screen%20Shot%202022-06-16%20at%2012.03.32.png)
+
+![](Screen%20Shot%202022-06-16%20at%2012.03.32.png)
 
 Clicking on the 'Brows Data' button will then show a list of tables that can be selected to view the contents.
-![](/assets/images/Screen%20Shot%202022-06-16%20at%2012.03.03.png)
+
+![](Screen%20Shot%202022-06-16%20at%2012.03.03.png)
+
 Each table will contain either a standard database with schema, or a binary blob which can be exported and viewed externally. The contents of these SQLite and plist files will vary depending on the application. We'll explore these in depth in another article.
 
 ## Application Sandboxing
@@ -60,6 +66,6 @@ Two main folders used are in the User's Library folder:
 - `~/Library/Containers`
 - `~/Library/Group Containers`
 
-![](/assets/images/Pasted%20image%2020220616122159.png)
+![](Pasted%20image%2020220616122159.png)
 
 These aliased folders will give access to other parts of the file system when the application requests it and the user grants permission. 
