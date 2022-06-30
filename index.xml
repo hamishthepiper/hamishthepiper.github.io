@@ -1,13 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Title Goes Here</title><link>https://blog.piper-security.net/</link><description>Recent content on Title Goes Here</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.piper-security.net/index.xml" rel="self" type="application/rss+xml"/><item><title>macOS Application Forensics</title><link>https://blog.piper-security.net/p/macos-application-forensics/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://blog.piper-security.net/p/macos-application-forensics/</guid><description>&lt;h2 id="background-and-setup">Background and Setup&lt;/h2>
-&lt;p>When investigating installed applications on macOS, the artifacts will likely be contained within either a &lt;a class="link" href="https://en.wikipedia.org/wiki/Property_list" target="_blank" rel="noopener"
->Property List&lt;/a> (&lt;code>.plist&lt;/code>) file or an &lt;a class="link" href="https://www.sqlite.org/index.html" target="_blank" rel="noopener"
->SQLite&lt;/a> file. Both of these files are common across Apple&amp;rsquo;s ecosystem, including it&amp;rsquo;s mobile and IoT operating systems.&lt;/p>
-&lt;p>The best platform to examine macOS applications is from a macOS system. Installing &lt;a class="link" href="https://developer.apple.com/xcode/resources/" target="_blank" rel="noopener"
->Xcode&lt;/a> developer tools for macOS will give the ability to read both types of plist files, and a FOSS tool like &lt;a class="link" href="https://sqlitebrowser.org/dl/" target="_blank" rel="noopener"
->DB Browser for SQLite&lt;/a> will allow opening and exploring SQLite files and doing queries on data in different tables.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Title Goes Here</title><link>https://blog.piper-security.net/</link><description>Recent content on Title Goes Here</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.piper-security.net/index.xml" rel="self" type="application/rss+xml"/><item><title>macOS Application Forensics</title><link>https://blog.piper-security.net/post/macos-application-forensics/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://blog.piper-security.net/post/macos-application-forensics/</guid><description>&lt;h2 id="background-and-setup">Background and Setup&lt;/h2>
+&lt;p>When investigating installed applications on macOS, the artifacts will likely be contained within either a &lt;a href="https://en.wikipedia.org/wiki/Property_list">Property List&lt;/a> (&lt;code>.plist&lt;/code>) file or an &lt;a href="https://www.sqlite.org/index.html">SQLite&lt;/a> file. Both of these files are common across Apple&amp;rsquo;s ecosystem, including it&amp;rsquo;s mobile and IoT operating systems.&lt;/p>
+&lt;p>The best platform to examine macOS applications is from a macOS system. Installing &lt;a href="https://developer.apple.com/xcode/resources/">Xcode&lt;/a> developer tools for macOS will give the ability to read both types of plist files, and a FOSS tool like &lt;a href="https://sqlitebrowser.org/dl/">DB Browser for SQLite&lt;/a> will allow opening and exploring SQLite files and doing queries on data in different tables.&lt;/p>
 &lt;h2 id="where-to-look">Where To Look&lt;/h2>
-&lt;p>Tools are great, but you have to know where to point them to get the answers you need. By default, macOS uses &lt;a class="link" href="https://support.apple.com/en-us/HT204899" target="_blank" rel="noopener"
->System Integrity Protection&lt;/a> to limit &lt;strong>3rd party&lt;/strong> installers to the following directories:&lt;/p>
+&lt;p>Tools are great, but you have to know where to point them to get the answers you need. By default, macOS uses &lt;a href="https://support.apple.com/en-us/HT204899">System Integrity Protection&lt;/a> to limit &lt;strong>3rd party&lt;/strong> installers to the following directories:&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>/Applications&lt;/code>&lt;/li>
 &lt;li>&lt;code>/Library&lt;/code>&lt;/li>
@@ -16,40 +11,25 @@
 &lt;p>This means that if you are examining an &lt;strong>Apple Native&lt;/strong> application such as Safari, there might be artifacts outside these locations. These files are hidden by default when viewing with Unix-type OSes. With macOS, &lt;code>CMD + SHIFT + .&lt;/code> while in the Finder window will show hidden system files.&lt;/p>
 &lt;h3 id="the-home-directory">The Home Directory&lt;/h3>
 &lt;p>The user&amp;rsquo;s home directory (~) usually contains the bulk of forensically-relevant files for specific applications. Some programs use &amp;ldquo;dotfiles&amp;rdquo; (files or directories prepended with &lt;code>.&lt;/code> which are hidden) which are at the root of the user&amp;rsquo;s directory, and could contain relevant information.&lt;/p>
-&lt;p>&lt;img src="https://blog.piper-security.net/assets/images/Pasted%20image%2020220613212422.png"
-loading="lazy"
-alt="Hidden folder for Visual Studio Code"
->&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020220613212422.png" alt="Hidden folder for Visual Studio Code">&lt;/p>
 &lt;h4 id="library">~/Library&lt;/h4>
 &lt;p>The user&amp;rsquo;s Library directory is where most application-specific files are found. There are several supporting directories.&lt;/p>
 &lt;p>First, the application will have a discrete place in the user&amp;rsquo;s Library directory.&lt;/p>
-&lt;p>&lt;img src="https://blog.piper-security.net/static/assets/images/Pasted%20image%2020220613222840.png"
-loading="lazy"
->&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020220613222840.png" alt="">&lt;/p>
 &lt;p>The above screenshot is the directory for the Reminders application. There are several SQLite database files in sub-directories as well as a plist file. Double-clicking on the .plist file with Xcode tools installed will show the contents whether it is a regular or binary format.&lt;/p>
-&lt;p>&lt;img src="https://blog.piper-security.net/assets/images/Pasted%20image%2020220613223534.png"
-loading="lazy"
->&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020220613223534.png" alt="">&lt;/p>
 &lt;blockquote>
 &lt;p>In this case, the &lt;code>AccountInformation.plist&lt;/code> file contains no relevant information.&lt;/p>
 &lt;/blockquote>
-&lt;p>However the Files directory contains attachments embedded within individual entries.
-&lt;img src="https://blog.piper-security.net/assets/images/Pasted%20image%2020220613223734.png"
-loading="lazy"
->&lt;/p>
-&lt;p>And the Stores directory contains SQLite files.
-&lt;img src="https://blog.piper-security.net/assets/images/Pasted%20image%2020220613221659.png"
-loading="lazy"
->&lt;/p>
-&lt;p>Opening the &lt;code>Data-local.sqlite&lt;/code> file with DB Browser for SQLite will let us see that data.
-&lt;img src="https://blog.piper-security.net/assets/images/Screen%20Shot%202022-06-16%20at%2012.03.32.png"
-loading="lazy"
->&lt;/p>
-&lt;p>Clicking on the &amp;lsquo;Brows Data&amp;rsquo; button will then show a list of tables that can be selected to view the contents.
-&lt;img src="https://blog.piper-security.net/assets/images/Screen%20Shot%202022-06-16%20at%2012.03.03.png"
-loading="lazy"
->
-Each table will contain either a standard database with schema, or a binary blob which can be exported and viewed externally. The contents of these SQLite and plist files will vary depending on the application. We&amp;rsquo;ll explore these in depth in another article.&lt;/p>
+&lt;p>However the Files directory contains attachments embedded within individual entries.&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020220613223734.png" alt="">&lt;/p>
+&lt;p>And the Stores directory contains SQLite files.&lt;/p>
+&lt;p>&lt;img src="Pasted%20image%2020220613221659.png" alt="">&lt;/p>
+&lt;p>Opening the &lt;code>Data-local.sqlite&lt;/code> file with DB Browser for SQLite will let us see that data.&lt;/p>
+&lt;p>&lt;img src="Screen%20Shot%202022-06-16%20at%2012.03.32.png" alt="">&lt;/p>
+&lt;p>Clicking on the &amp;lsquo;Brows Data&amp;rsquo; button will then show a list of tables that can be selected to view the contents.&lt;/p>
+&lt;p>&lt;img src="Screen%20Shot%202022-06-16%20at%2012.03.03.png" alt="">&lt;/p>
+&lt;p>Each table will contain either a standard database with schema, or a binary blob which can be exported and viewed externally. The contents of these SQLite and plist files will vary depending on the application. We&amp;rsquo;ll explore these in depth in another article.&lt;/p>
 &lt;h2 id="application-sandboxing">Application Sandboxing&lt;/h2>
 &lt;p>The other thing to be aware of is that macOS applications are run in a sandbox. Sandboxed applications are loaded only with permissions granted to it, and a virtual environment is created for the application which mimics the directory structure on disk via &lt;em>aliased directories&lt;/em> which have permissions set for read and/or write.&lt;/p>
 &lt;p>Two main folders used are in the User&amp;rsquo;s Library folder:&lt;/p>
@@ -57,9 +37,7 @@ Each table will contain either a standard database with schema, or a binary blob
 &lt;li>&lt;code>~/Library/Containers&lt;/code>&lt;/li>
 &lt;li>&lt;code>~/Library/Group Containers&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://blog.piper-security.net/assets/images/Pasted%20image%2020220616122159.png"
-loading="lazy"
->&lt;/p>
-&lt;p>These aliased folders will give access to other parts of the file system when the application requests it and the user grants permission.&lt;/p></description></item><item><title>Hello World</title><link>https://blog.piper-security.net/p/hello-world/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://blog.piper-security.net/p/hello-world/</guid><description>&lt;h1 id="hello-world">Hello World&lt;/h1>
+&lt;p>&lt;img src="Pasted%20image%2020220616122159.png" alt="">&lt;/p>
+&lt;p>These aliased folders will give access to other parts of the file system when the application requests it and the user grants permission.&lt;/p></description></item><item><title>Hello World</title><link>https://blog.piper-security.net/post/hello-world/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://blog.piper-security.net/post/hello-world/</guid><description>&lt;h1 id="hello-world">Hello World&lt;/h1>
 &lt;p>This is the first post on my static site! I&amp;rsquo;ll be using this platform to post up some humble musings and information that some might find useful.&lt;/p>
 &lt;p>In particular, I know that many are interested in getting into the field of Information Security. I hope that by providing some of these posts I can help pave the way for others to feel less intimidated by the field.&lt;/p></description></item></channel></rss>
