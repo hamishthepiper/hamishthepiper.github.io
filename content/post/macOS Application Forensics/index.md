@@ -1,11 +1,11 @@
 ---
 categories:
 - DFIR
-- macOS
 date: "2022-06-16T00:00:00Z"
 tags:
 - sqlite
 - plist
+- macOS
 title: macOS Application Forensics
 ---
 

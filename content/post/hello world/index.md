@@ -1,6 +1,5 @@
 ---
 categories:
-- Info
 - Admin
 date: "2022-05-30T00:00:00Z"
 tags:
