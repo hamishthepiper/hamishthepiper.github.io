@@ -1,4 +1,5 @@
 <%*
+<!-- https://github.com/SilentVoid13/Templater/discussions/569 -->
 async function createFolder(dir, times = 1) {
         if (times > 5) {
             throw new Error('createFolder: too many tries');
@@ -26,4 +27,5 @@ categories:
 tags: 
 - 
 ---
-## <% tp.file.cursor(1) %>
+## TLDR
+<% tp.file.cursor(1) %>
